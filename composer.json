@@ -1,0 +1,20 @@
+{
+    "name": "papoms/VoluumApiWrapper",
+    "description": "A PHP Api Wrapper for the Voluum Reporting API",
+    "license": "MIT",
+    "keywords": ["Voluum", "Reporting", "Api"],
+    "authors": [
+        {
+            "name": "Paul porzky",
+            "email": "paulporzky@gmail.com"
+        }
+    ],
+    "require": {
+      "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PapoMS\\VoluumApiWrapper\\": "src"
+        }
+    }
+}
