@@ -7,8 +7,8 @@ use PapoMS\VoluumApiWrapper\VoluumHelper;
 
 class ReportingClient
 {
-	const VOLUUM_REPORTING_BASE_URI = 'https://reports.voluum.com/report';
-	const VOLUUM_LOGIN_BASE_URI = 'https://security.voluum.com/login';
+	const VOLUUM_REPORTING_BASE_URI = 'https://api.voluum.com/report';
+	const VOLUUM_LOGIN_BASE_URI = 'https://api.voluum.com/auth/session';
 	
 	private $client;
 	private $username;
@@ -40,17 +40,17 @@ class ReportingClient
 			return false;
 		}
 
-		//Use Basic Auth to retrieve the Auth Token for further requests
-		$res = $this->client->get(self::VOLUUM_LOGIN_BASE_URI, [
-    		'auth' => [
-        		$this->username, 
-        		$this->password
+		// retrieve the Auth Token for further requests
+		$res = $client->post(self::VOLUUM_LOGIN_BASE_URI, [
+    		'json' => [
+    			'email'    => $this->username,
+    			'password' => $this->password
     		]
 		]);
 
 		$data = json_decode($res->getBody(), true);
 
-		if ( $data['loggedIn'] && isset($data['token']) ){
+		if ( isset($data['token']) ){
 			$this->authToken = $data['token'];
 			return true;	
 		}
